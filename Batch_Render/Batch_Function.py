@@ -11,13 +11,13 @@ import nuke
 
 # 导入外部数据
 
-with open(("C:/Users/Administrator/.nuke/Batch_Render/Data/write_Data.json").replace("\\","/"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/write_Data.json").replace("\\","/"), "r") as f:
     Write_volue = json.load(f)
 
-with open(("C:/Users/Administrator/.nuke/Batch_Render/Data/Path_Data.json").replace("\\","/"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/Path_Data.json").replace("\\","/"), "r") as f:
     Path_Data = json.load(f)
 
-with open(("C:/Users/Administrator/.nuke/Batch_Render/Data/filetype.json").replace("\\","/"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/filetype.json").replace("\\","/"), "r") as f:
     filetype = json.load(f)
 
 Sqe_path = Path_Data["Sqe_path"]

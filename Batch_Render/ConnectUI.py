@@ -88,7 +88,7 @@ class PyQtWin(QtWidgets.QWidget,Ui_Nuke_BatchRender):
         for table in tables:
             finditem(table.children())
 
-        with open("C:/Users/Administrator/.nuke/Batch_Render/Data/write_Data.json", "w") as write_Data:
+        with open(os.path.join(os.getcwd(),Data/write_Data.json), "w") as write_Data:
             write_Data.write(json.dumps(Write_Data))
 
         ori_files  =[self.Nukefile_list.item(i) for i in range(self.Nukefile_list.count())] # 获取所有需要操作的文件
@@ -99,10 +99,10 @@ class PyQtWin(QtWidgets.QWidget,Ui_Nuke_BatchRender):
             ori_path = ori_file.text().replace("\\", "/")  # 求得Nuke单帧文件路径
             file_path = os.path.join(self.OutfilePath.text(),os.path.split(ori_file.text())[1]).replace("\\","/") # 求得Nuke序列文件存放路径
             path_data = {"Sqe_path":self.Sequence_Path.text(),"file_path":file_path,"ori_path":ori_path}
-            with open("C:/Users/Administrator/.nuke/Batch_Render/Data/Path_Data.json","w") as Path_Data:
+            with open(os.path.join(os.getcwd(),Data/Path_Data.json),"w") as Path_Data:
                 Path_Data.write(json.dumps(path_data))
             Nuke_Path = self.getNukePath()
-            child = subprocess.Popen("{} {}".format(Nuke_Path,"-t C:/Users/Administrator/.nuke/Batch_Render/Batch_Function.py"),stdout = subprocess.PIPE,stdin=subprocess.PIPE)
+            child = subprocess.Popen("{} {} {}".format(Nuke_Path,"-t", os.path.join(os.getcwd(),Batch_Function.py),stdout = subprocess.PIPE,stdin=subprocess.PIPE)
             app.processEvents()
             self.progressBar.setValue(filenum)
             child.wait()
@@ -195,9 +195,9 @@ class Run(threading.Thread):
         for Renderfile in self.Renderfiles:
             self.__flag.wait()
             self.Massage_progressBar.setMaximum(0)
-            with open("C:/Users/Administrator/.nuke/Batch_Render/Data/Render_Data.json", "w") as Render_Data:
+            with open(os.path.join(os.getcwd(),"Data/Render_Data.json"),"w") as Render_Data:
                 Render_Data.write(json.dumps(Renderfile))
-            self.child = subprocess.Popen("{} {}".format(self.Nuke_Path, "-t C:/Users/Administrator/.nuke/Batch_Render/Render_Run.py"))
+            self.child = subprocess.Popen("{} {} {}".format(self.Nuke_Path, "-t", os.path.join(os.getcwd(),"Render_Run.py")))
             self.Run_progressBar.setValue(self.filenum)
             self.child.wait()
             self.filenum += 1
