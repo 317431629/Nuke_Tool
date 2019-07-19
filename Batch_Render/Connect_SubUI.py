@@ -70,7 +70,7 @@ class SubWin(QtWidgets.QWidget,Ui_Out_Type):
         for key in list(filetype):
             if filetype[key] == "":
                 del filetype[key]
-        with open("C:/Users/Administrator/.nuke/Batch_Render/Data/filetype.json","w") as Filetype:
+        with open(os.path.join(os.getcwd(),"Data/filetype.json").replace("\\","/"),"w") as Filetype:
             Filetype.write(json.dumps(filetype))
 
 
