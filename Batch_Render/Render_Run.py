@@ -10,13 +10,13 @@ import nuke
 import re
 
 # 导入外部数据
-with open(os.path.join(os.getcwd(),"Data/write_Data.json"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/write_Data.json").replace("\\","/"), "r") as f:
     Write_volue = json.load(f)
 
-with open(os.path.join(os.getcwd(),"Data/Path_Data.json"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/Path_Data.json").replace("\\","/"), "r") as f:
     Path_Data = json.load(f)
 
-with open(os.path.join(os.getcwd(),"Data/Render_Data.json"), "r") as f:
+with open(os.path.join(os.getcwd(),"Data/Render_Data.json").replace("\\","/"), "r") as f:
     RenderfilePath = str(json.load(f)) #需要渲染的Nuke文件路径
 
 Sqe_path = Path_Data["Sqe_path"]    #序列文件路径
